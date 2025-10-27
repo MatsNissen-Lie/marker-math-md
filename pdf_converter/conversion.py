@@ -85,9 +85,11 @@ def _save_artifacts(out_md: Path, markdown_text: str, images, metadata) -> None:
 
     asset_dir = out_md.with_name(f"{out_md.stem}_assets")
     asset_dir.mkdir(parents=True, exist_ok=True)
-    for name, image in images.items():
+
+    for index, (name, image) in enumerate(images.items(), start=1):
         safe_name = name.replace("/", "_")
-        target_path = asset_dir / safe_name
+        unique_name = f"{out_md.stem}_{index:03d}_{safe_name}"
+        target_path = asset_dir / unique_name
         convert_if_not_rgb(image).save(target_path)
 
 

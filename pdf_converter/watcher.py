@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import logging
+import os
 import queue
 import threading
 import time
 from pathlib import Path
-from typing import Iterable, Union
+from typing import Iterable, Union, cast
 
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
@@ -16,23 +17,35 @@ from .conversion import convert_pdf, gather_inbox_pdfs, is_pdf
 
 LOGGER = logging.getLogger(__name__)
 
-def _to_path(value: Union[str, bytes]) -> Path:
-    if isinstance(value, bytes):
-        return Path(value.decode("utf-8", errors="ignore"))
-    return Path(value)
+OSPathish = Union[str, bytes, os.PathLike[str], os.PathLike[bytes]]
+ExtendedPathish = Union[OSPathish, bytearray, memoryview]
 
+
+def _to_path(value: ExtendedPathish | Path) -> Path:
+    if isinstance(value, Path):
+        return value
+    os_compatible: OSPathish
+    if isinstance(value, (bytearray, memoryview)):
+        os_compatible = bytes(value)
+    else:
+        os_compatible = cast(OSPathish, value)
+    return Path(os.fsdecode(os_compatible))
 
 
 class ConversionWorker:
     """Background worker that serializes PDF conversions."""
 
-    def __init__(self, outdir: Path, *, apply_llm: bool, logger: logging.Logger | None = None):
+    def __init__(
+        self, outdir: Path, *, apply_llm: bool, logger: logging.Logger | None = None
+    ):
         self._outdir = outdir
         self._apply_llm = apply_llm
         self._logger = logger or LOGGER
         self._queue: "queue.Queue[Path | None]" = queue.Queue()
         self._stop = threading.Event()
-        self._thread = threading.Thread(target=self._run, name="pdf-convert-worker", daemon=True)
+        self._thread = threading.Thread(
+            target=self._run, name="pdf-convert-worker", daemon=True
+        )
         self._pending: set[Path] = set()
 
     def start(self) -> None:
@@ -73,14 +86,21 @@ class ConversionWorker:
                 if not self._wait_until_ready(pdf_path):
                     self._logger.warning("[skip] %s never became ready", pdf_path.name)
                     continue
-                convert_pdf(pdf_path, self._outdir, apply_llm=self._apply_llm, logger=self._logger)
+                convert_pdf(
+                    pdf_path,
+                    self._outdir,
+                    apply_llm=self._apply_llm,
+                    logger=self._logger,
+                )
             except Exception as exc:
                 self._logger.error("[fail] %s: %s", pdf_path.name, exc)
             finally:
                 self._pending.discard(pdf_path)
                 self._queue.task_done()
 
-    def _wait_until_ready(self, pdf_path: Path, *, attempts: int = 10, delay: float = 1.0) -> bool:
+    def _wait_until_ready(
+        self, pdf_path: Path, *, attempts: int = 10, delay: float = 1.0
+    ) -> bool:
         last_size = -1
         for _ in range(attempts):
             if not pdf_path.exists():
