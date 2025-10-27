@@ -57,7 +57,8 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--strip-existing-ocr",
-        action="store_true",
+        action=argparse.BooleanOptionalAction,
+        default=True,
         help="Strip embedded OCR text before processing (helps noisy PDFs).",
     )
     parser.add_argument(
