@@ -13,7 +13,7 @@ from typing import Iterable, Union, cast
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-from .conversion import convert_pdf, gather_inbox_pdfs, is_pdf
+from .conversion import MarkerOptions, convert_pdf, gather_inbox_pdfs, is_pdf
 
 LOGGER = logging.getLogger(__name__)
 
@@ -36,10 +36,14 @@ class ConversionWorker:
     """Background worker that serializes PDF conversions."""
 
     def __init__(
-        self, outdir: Path, *, apply_llm: bool, logger: logging.Logger | None = None
+        self,
+        outdir: Path,
+        *,
+        marker_options: MarkerOptions,
+        logger: logging.Logger | None = None,
     ):
         self._outdir = outdir
-        self._apply_llm = apply_llm
+        self._marker_options = marker_options
         self._logger = logger or LOGGER
         self._queue: "queue.Queue[Path | None]" = queue.Queue()
         self._stop = threading.Event()
@@ -89,7 +93,7 @@ class ConversionWorker:
                 convert_pdf(
                     pdf_path,
                     self._outdir,
-                    apply_llm=self._apply_llm,
+                    options=self._marker_options,
                     logger=self._logger,
                 )
             except Exception as exc:
@@ -145,7 +149,7 @@ def run_inbox_watcher(
     outdir: Path,
     *,
     runtime_seconds: int,
-    apply_llm: bool,
+    marker_options: MarkerOptions,
     poll_interval: float,
     logger: logging.Logger | None = None,
 ) -> None:
@@ -153,7 +157,11 @@ def run_inbox_watcher(
     outdir.mkdir(parents=True, exist_ok=True)
 
     logger = logger or LOGGER
-    worker = ConversionWorker(outdir, apply_llm=apply_llm, logger=logger)
+    worker = ConversionWorker(
+        outdir,
+        marker_options=marker_options,
+        logger=logger,
+    )
     handler = InboxEventHandler(worker, logger=logger)
     observer = Observer()
     observer.schedule(handler, str(inbox_dir), recursive=False)

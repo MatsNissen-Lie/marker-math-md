@@ -7,6 +7,7 @@ import logging
 from pathlib import Path
 from typing import Sequence
 
+from .conversion import MarkerOptions
 from .watcher import run_inbox_watcher
 
 DEFAULT_RUNTIME = 60 * 60  # 1 hour
@@ -14,7 +15,9 @@ DEFAULT_POLL_INTERVAL = 1.0
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Watch an inbox folder and convert PDFs to Markdown using Marker.")
+    parser = argparse.ArgumentParser(
+        description="Watch an inbox folder and convert PDFs to Markdown using Marker."
+    )
     parser.add_argument(
         "--runtime-seconds",
         type=int,
@@ -40,9 +43,32 @@ def build_parser() -> argparse.ArgumentParser:
         help="Watcher main-loop sleep interval in seconds.",
     )
     parser.add_argument(
-        "--no-llm",
+        "--use-llm",
         action="store_true",
-        help="Skip the optional OpenAI cleanup even if OPENAI_API_KEY is set.",
+        help="Enable Marker hybrid mode to post-process output with the configured LLM service.",
+    )
+    parser.add_argument(
+        "--force-ocr",
+        action="store_true",
+        help="Force OCR on all lines, which can improve inline math extraction.",
+    )
+    parser.add_argument(
+        "--strip-existing-ocr",
+        action="store_true",
+        help="Strip embedded OCR text before processing (helps noisy PDFs).",
+    )
+    parser.add_argument(
+        "--redo-inline-math",
+        action="store_true",
+        help="Re-run inline math detection to boost LaTeX fidelity.",
+    )
+    parser.add_argument(
+        "--llm-service",
+        default=None,
+        help=(
+            "Optional fully-qualified Marker LLM service class, e.g. "
+            "marker.services.gemini.GoogleGeminiService."
+        ),
     )
     parser.add_argument(
         "--log-level",
@@ -75,15 +101,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     logger.info("Inbox: %s", inbox_dir)
     logger.info("Output: %s", outdir)
 
+    marker_options = MarkerOptions(
+        use_llm=args.use_llm,
+        force_ocr=args.force_ocr,
+        strip_existing_ocr=args.strip_existing_ocr,
+        redo_inline_math=args.redo_inline_math,
+        llm_service=args.llm_service,
+    )
+    logger.info("Marker options: %s", marker_options.describe())
+
     run_inbox_watcher(
         inbox_dir=inbox_dir,
         outdir=outdir,
         runtime_seconds=args.runtime_seconds,
-        apply_llm=not args.no_llm,
+        marker_options=marker_options,
         poll_interval=args.poll_interval,
         logger=logger,
     )
 
+    logger.info("Watcher finished with options: %s", marker_options.describe())
     return 0
 
 
