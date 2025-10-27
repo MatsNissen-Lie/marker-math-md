@@ -1,0 +1,12 @@
+# env
+.env
+.python-version
+__pycache__/
+__pycache__
+.vscode/
+.github/
+.venv/
+.DS_Store
+*.pyc
+*.pyo
+*.pyd
