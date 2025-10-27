@@ -17,3 +17,6 @@ All scripts and commands must be executed using uv run path/to/python_file.py.
 
 ## Testing Guidance:
 When a file has already had its relevant tests executed during this session, you don't need to rerun the same tests again after making additional edits to that file unless the change affects test coverage or functionality.
+
+## Sandbox Notes
+If uv needs to download packages while running inside a sandbox, set `UV_CACHE_DIR=.uv-cache` (or another workspace path) so it can write its cache inside the project. The default `~/.cache/uv` location is blocked and will raise permission errors.

@@ -1,175 +1,240 @@
-# Create a ready-to-run batch converter for PDFs -> Markdown using PyMuPDF4LLM.
-# It supports:
-# - One-off batch conversion of a folder
-# - Optional --watch mode that polls for new PDFs
-# - Skips already-converted files unless --force is set
-# - Clean logging and simple CLI
-#
-# It does NOT require an OpenAI key. (You can add LLM-based OCR later if you want.)
-
+# Create a single-file "best tools" converter:
+# - Uses Marker locally for PDF→Markdown (great math fidelity)
+# - If OPENAI_API_KEY is present, runs an LLM cleanup pass to fix equations/LaTeX/structure
+# - No arguments. Drag-and-drop or double-click to choose files. Outputs to ./markdown
+# - Still zero config besides `pip install marker-pdf openai` and setting OPENAI_API_KEY for the optional step
 from pathlib import Path
 import textwrap
 
-project_dir = Path("/mnt/data/pdf2md_tool")
-project_dir.mkdir(parents=True, exist_ok=True)
+proj = Path("/mnt/data/pdf2md_best_plus")
+proj.mkdir(parents=True, exist_ok=True)
 
-# Script file
-script = project_dir / "pdf2md_batch.py"
-script.write_text(textwrap.dedent("""
+script_path = proj / "pdf2md_best_plus.py"
+script_path.write_text(textwrap.dedent("""
     #!/usr/bin/env python3
     # -*- coding: utf-8 -*-
     \"\"\"
-    PDF → Markdown batch converter (local, free, open-source) using PyMuPDF4LLM.
+    Best-math PDF → Markdown with optional LLM cleanup (zero-argument tool).
 
-    Usage:
-      # One-off batch conversion
-      python pdf2md_batch.py --in ./inbox --out ./markdown
+    How it works
+    ------------
+    1) Converts PDFs to Markdown using Marker (local; no network; great at equations/tables).
+    2) If OPENAI_API_KEY is set, runs an LLM post-pass to normalize/fix LaTeX and structure.
+       - Uses the OpenAI Chat Completions API via the `openai` Python client.
+       - If the key is missing or any error occurs, it simply keeps the Marker output.
 
-      # Watch a folder for new PDFs (polling every 3s)
-      python pdf2md_batch.py --in ./inbox --out ./markdown --watch --interval 3
+    Usage (no flags):
+      - Double-click to run → file dialog → pick one or more PDFs → outputs to ./markdown
+      - OR drag & drop PDFs onto this script → converts immediately to ./markdown
 
-      # Overwrite existing .md files
-      python pdf2md_batch.py --in ./inbox --out ./markdown --force
+    Install once:
+      pip install marker-pdf openai
 
-    Requirements:
-      pip install pymupdf4llm
+    Set API key (optional, only for the cleanup step):
+      export OPENAI_API_KEY=sk-...        # macOS/Linux
+      setx OPENAI_API_KEY sk-...          # Windows (new shell)
 
-    Notes:
-      - Runs fully local. No API keys needed.
-      - Produces one .md per .pdf with same basename.
-      - Hidden/temp files and non-PDFs are ignored.
     \"\"\"
-
-    import argparse
+    import os
     import sys
-    import time
+    import shutil
+    import subprocess
     from pathlib import Path
+    from typing import List, Optional
 
-    try:
-        import pymupdf4llm as pml
-    except Exception as e:
-        print("ERROR: pymupdf4llm is not installed. Install with: pip install pymupdf4llm", file=sys.stderr)
-        raise
-
-    def is_pdf(path: Path) -> bool:
-        name = path.name
-        if name.startswith('.') or name.endswith('~'):
-            return False
-        return path.is_file() and path.suffix.lower() == '.pdf'
-
-    def convert_one(pdf_path: Path, out_dir: Path, force: bool = False) -> bool:
-        md_path = out_dir / (pdf_path.stem + ".md")
-        if md_path.exists() and not force:
-            print(f"[skip] {pdf_path.name} → {md_path.name} (already exists)")
-            return False
+    # --- File picking (GUI if no args) ---
+    def pick_pdfs_gui() -> List[Path]:
         try:
-            md_text = pml.to_markdown(str(pdf_path))
-            md_path.write_text(md_text, encoding="utf-8")
-            print(f"[ok]   {pdf_path.name} → {md_path.name}")
-            return True
-        except Exception as e:
-            print(f"[fail] {pdf_path.name}: {e}", file=sys.stderr)
-            return False
+            import tkinter as tk
+            from tkinter import filedialog
+        except Exception:
+            return []
+        root = tk.Tk()
+        root.withdraw()
+        files = filedialog.askopenfilenames(
+            title="Select PDF files",
+            filetypes=[("PDF files", "*.pdf")]
+        )
+        try:
+            root.destroy()
+        except Exception:
+            pass
+        return [Path(f) for f in (files or [])]
 
-    def batch_once(in_dir: Path, out_dir: Path, force: bool = False) -> int:
-        out_dir.mkdir(parents=True, exist_ok=True)
-        count = 0
-        for pdf in sorted(in_dir.iterdir()):
-            if is_pdf(pdf):
-                if convert_one(pdf, out_dir, force=force):
-                    count += 1
-        return count
+    def is_pdf(p: Path) -> bool:
+        return p.is_file() and p.suffix.lower() == ".pdf" and not p.name.startswith(".")
 
-    def watch_loop(in_dir: Path, out_dir: Path, force: bool, interval: float) -> None:
-        print(f"Watching '{in_dir}' for new PDFs… (poll every {interval:.1f}s)")
-        seen = set()
-        # Pre-populate with existing files so we only process new ones
-        for pdf in in_dir.iterdir():
-            if is_pdf(pdf):
-                seen.add(pdf.resolve())
+    def ensure_outdir(base: Path) -> Path:
+        outdir = base / "markdown"
+        outdir.mkdir(parents=True, exist_ok=True)
+        return outdir
 
-        while True:
+    # --- Conversion: Marker (local) ---
+    def convert_with_marker(pdf_path: Path, out_md: Path) -> None:
+        exe = shutil.which("marker")
+        if exe:
+            cmd = [exe, "--pdf", str(pdf_path), "--md", str(out_md)]
+        else:
+            # Fallback: python -m marker
             try:
-                for pdf in in_dir.iterdir():
-                    if not is_pdf(pdf):
-                        continue
-                    r = pdf.resolve()
-                    if r not in seen:
-                        convert_one(pdf, out_dir, force=force)
-                        seen.add(r)
-                time.sleep(interval)
-            except KeyboardInterrupt:
-                print("\\nStopped watching.")
-                return
+                import marker  # noqa: F401
+                cmd = [sys.executable, "-m", "marker", "--pdf", str(pdf_path), "--md", str(out_md)]
+            except Exception:
+                raise RuntimeError(\"Marker not installed. Install with: pip install marker-pdf\")
+        subprocess.run(cmd, check=True)
 
-    def parse_args(argv=None):
-        ap = argparse.ArgumentParser(description="Batch convert PDFs to Markdown (local) using PyMuPDF4LLM.")
-        ap.add_argument("--in", dest="in_dir", required=True, help="Input folder to scan for PDFs.")
-        ap.add_argument("--out", dest="out_dir", required=True, help="Output folder for .md files.")
-        ap.add_argument("--force", action="store_true", help="Overwrite .md files if they already exist.")
-        ap.add_argument("--watch", action="store_true", help="Keep running and convert new PDFs as they appear.")
-        ap.add_argument("--interval", type=float, default=3.0, help="Polling interval (seconds) in --watch mode.")
-        return ap.parse_args(argv)
+    # --- Optional LLM cleanup (OpenAI) ---
+    def llm_cleanup(md_text: str) -> Optional[str]:
+        api_key = os.environ.get("OPENAI_API_KEY")
+        if not api_key:
+            return None
+        try:
+            # Minimal dependency on the official OpenAI client
+            from openai import OpenAI
+            client = OpenAI(api_key=api_key)
+            system = (
+                "You are a strict Markdown + LaTeX typesetting assistant. "
+                "Your task is to clean and normalize Markdown containing math. "
+                "Rules: "
+                "1) Preserve meaning and all content; do not summarize or omit sections. "
+                "2) Fix broken or split equations; ensure proper LaTeX syntax. "
+                "3) Convert pseudo-math to LaTeX where obvious; keep inline math in $...$ and display math in $$...$$. "
+                "4) Merge line-broken equations; remove soft hyphens from wrapped math tokens. "
+                "5) Keep code blocks, tables, lists intact; do not hallucinate figures or citations. "
+                "6) If unsure, leave text untouched. "
+            )
+            user = (
+                "Clean this Markdown for math fidelity. "
+                "Return ONLY the corrected Markdown body, no explanations:\n\n"
+                f"{md_text}"
+            )
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": user},
+                ],
+                temperature=0.0,
+            )
+            out = resp.choices[0].message.content or ""
+            # Some clients may wrap in triple backticks; strip if present.
+            if out.strip().startswith("```"):
+                # naive fence strip
+                out = out.strip().strip("`")
+                # in case of ```markdown fences
+                out = out.split("\\n", 1)[-1]
+                if out.endswith("```"):
+                    out = out[:-3]
+            return out.strip() or None
+        except Exception:
+            # Any failure: fall back silently
+            return None
 
-    def main(argv=None):
-        args = parse_args(argv)
-        in_dir = Path(args.in_dir).expanduser().resolve()
-        out_dir = Path(args.out_dir).expanduser().resolve()
+    def main() -> int:
+        # Collect PDFs
+        argv_paths = [Path(a) for a in sys.argv[1:]]
+        pdfs = [p for p in argv_paths if is_pdf(p)]
+        if not pdfs:
+            pdfs = [p for p in pick_pdfs_gui() if is_pdf(p)]
+            if not pdfs:
+                print("No PDFs provided. Exiting.")
+                return 0
 
-        if not in_dir.exists() or not in_dir.is_dir():
-            print(f"ERROR: Input directory does not exist or is not a directory: {in_dir}", file=sys.stderr)
-            return 2
+        base_dir = Path(__file__).resolve().parent
+        outdir = ensure_outdir(base_dir)
 
-        out_dir.mkdir(parents=True, exist_ok=True)
+        converted = 0
+        for pdf in pdfs:
+            out_md = outdir / (pdf.stem + ".md")
+            try:
+                print(f"[convert] {pdf.name} -> {out_md.name} (Marker)")
+                convert_with_marker(pdf, out_md)
+                md_text = out_md.read_text(encoding="utf-8")
 
-        # One-off batch pass
-        converted = batch_once(in_dir, out_dir, force=args.force)
-        print(f"Initial pass: {converted} file(s) converted.")
+                cleaned = llm_cleanup(md_text)
+                if cleaned:
+                    out_md.write_text(cleaned, encoding="utf-8")
+                    print(f"[ok] {out_md.name} (LLM cleanup applied)")
+                else:
+                    print(f"[ok] {out_md.name} (kept Marker output)")
+                converted += 1
+            except subprocess.CalledProcessError as e:
+                print(f"[fail] {pdf.name}: converter error: {e}")
+            except Exception as e:
+                print(f"[fail] {pdf.name}: {e}")
 
-        # Optionally stay alive and watch for new PDFs
-        if args.watch:
-            watch_loop(in_dir, out_dir, force=args.force, interval=args.interval)
-
+        print(f\"\\nDone. Converted {converted} file(s) → {outdir}\\n\")
         return 0
 
     if __name__ == "__main__":
         raise SystemExit(main())
 """), encoding="utf-8")
 
-# requirements.txt
-reqs = project_dir / "requirements.txt"
-reqs.write_text("pymupdf4llm>=0.0.17\n", encoding="utf-8")
+readme_path = proj / "README.txt"
+readme_path.write_text(textwrap.dedent("""
+    BEST setup (math-first) — Marker + optional LLM cleanup
 
-# README.md with quickstart
-readme = project_dir / "README.md"
-readme.write_text(textwrap.dedent("""
-    # PDF → Markdown (Local) with PyMuPDF4LLM
+    1) Install:
+         pip install marker-pdf openai
 
-    ## Quickstart
-    ```bash
-    # 1) Create two folders
-    mkdir -p inbox markdown
+    2) (Optional) Set API key for cleanup:
+         export OPENAI_API_KEY=sk-...        # macOS/Linux
+         setx OPENAI_API_KEY sk-...          # Windows (then open a new shell)
 
-    # 2) Install dependency (only needs Python 3.9+)
-    pip install -r requirements.txt
-    # or: pip install pymupdf4llm
+    3) Use (no flags needed):
+         - Double-click pdf2md_best_plus.py and pick PDFs, or
+         - Drag & drop PDFs onto pdf2md_best_plus.py
 
-    # 3) Run a one-off batch
-    python pdf2md_batch.py --in ./inbox --out ./markdown
+       Outputs .md files into a 'markdown' folder next to the script.
 
-    # 4) Or keep it running and drop PDFs into `inbox`
-    python pdf2md_batch.py --in ./inbox --out ./markdown --watch --interval 3
-    ```
-
-    - Each `file.pdf` in `inbox` becomes `file.md` in `markdown`.
-    - Re-run with `--force` to overwrite existing `.md` files.
-    - No API keys or internet required. Everything is processed locally.
-    - Works great on macOS (Intel/Apple Silicon), Linux, Windows.
-
-    ## Why PyMuPDF4LLM?
-    - Strong reading order, headings, lists, tables → clean Markdown.
-    - Tiny footprint, very fast.
-    - Easy to script for batch jobs.
+    Notes:
+      - Marker runs fully local and preserves math well.
+      - If OPENAI_API_KEY is set, a second pass fixes broken LaTeX and formatting.
+      - If the key is missing or the request fails, Marker output is kept as-is.
 """), encoding="utf-8")
 
-project_dir, list(project_dir.iterdir())
+proj, [p.name for p in proj.iterdir()]
+
+
+
+Awesome — I’ve bundled a “**best tools**” version that uses **Marker** for the local PDF→Markdown pass *and* (if you set your API key) an **LLM cleanup** pass to fix math/LaTeX.
+
+**Download:**
+
+* [pdf2md_best_plus.py](sandbox:/mnt/data/pdf2md_best_plus/pdf2md_best_plus.py)
+* [README.txt](sandbox:/mnt/data/pdf2md_best_plus/README.txt)
+
+### One-time install
+
+```bash
+pip install marker-pdf openai
+```
+
+### (Optional) enable the LLM pass
+
+```bash
+# macOS/Linux
+export OPENAI_API_KEY=sk-...
+
+# Windows (new shell afterwards)
+setx OPENAI_API_KEY sk-...
+```
+
+### Use (no args):
+
+* **Double-click** `pdf2md_best_plus.py` and choose PDFs in the dialog, or
+* **Drag & drop PDFs** onto the script.
+
+Output `.md` files land in a `markdown/` folder next to the script.
+
+**What it does**
+
+1. Runs **Marker** locally — best-in-class at preserving equations/tables as Markdown + LaTeX.
+2. If `OPENAI_API_KEY` is present, it automatically runs a **post-cleaning pass** (OpenAI Chat Completions; model set to a fast 4o-mini variant) to:
+
+   * merge broken math lines,
+   * normalize `$$...$$` display blocks and `$...$` inline math,
+   * fix obvious LaTeX tokenization glitches,
+   * leave everything else intact.
+
+If the key isn’t set or the call fails, it just keeps the Marker output. No switches, no prompts — purely automatic.
