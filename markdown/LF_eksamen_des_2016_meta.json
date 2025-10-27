@@ -1,0 +1,454 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Oppgave 1 (10 %)",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          71.58984375,
+          74.00390625
+        ],
+        [
+          179.12855529785156,
+          74.00390625
+        ],
+        [
+          179.12855529785156,
+          87.332275390625
+        ],
+        [
+          71.58984375,
+          87.332275390625
+        ]
+      ]
+    },
+    {
+      "title": "Formelt:",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          107.384765625,
+          226.123046875
+        ],
+        [
+          146.0331268310547,
+          226.123046875
+        ],
+        [
+          146.0331268310547,
+          238.18829345703125
+        ],
+        [
+          107.384765625,
+          238.18829345703125
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 2 (15 %)",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          70.716796875,
+          608.0654296875
+        ],
+        [
+          179.12986755371094,
+          608.0654296875
+        ],
+        [
+          179.12986755371094,
+          622.0522613525391
+        ],
+        [
+          70.716796875,
+          622.0522613525391
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 3 (25 %)",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          70.42578125,
+          388.109375
+        ],
+        [
+          179.4005037783375,
+          387.6349065004452
+        ],
+        [
+          179.4005037783375,
+          401.265625
+        ],
+        [
+          70.42578125,
+          401.265625
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 4 (20 %)",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          70.42578125,
+          73.5927734375
+        ],
+        [
+          179.12855529785156,
+          73.5927734375
+        ],
+        [
+          179.12855529785156,
+          87.332275390625
+        ],
+        [
+          70.42578125,
+          87.332275390625
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 5 (10 %)",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          71.880859375,
+          279.9814453125
+        ],
+        [
+          179.12855529785156,
+          279.9814453125
+        ],
+        [
+          179.12855529785156,
+          294.09228515625
+        ],
+        [
+          71.880859375,
+          294.09228515625
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 6 (20 %)",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          70.716796875,
+          173.0869140625
+        ],
+        [
+          179.14158630371094,
+          173.0869140625
+        ],
+        [
+          179.14158630371094,
+          186.572265625
+        ],
+        [
+          70.716796875,
+          186.572265625
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          156
+        ],
+        [
+          "Line",
+          40
+        ],
+        [
+          "ListItem",
+          9
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          62
+        ],
+        [
+          "Span",
+          38
+        ],
+        [
+          "Text",
+          16
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          202
+        ],
+        [
+          "Line",
+          41
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          182
+        ],
+        [
+          "Line",
+          31
+        ],
+        [
+          "Text",
+          8
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Equation",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          122
+        ],
+        [
+          "Line",
+          43
+        ],
+        [
+          "ListItem",
+          4
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          94
+        ],
+        [
+          "Line",
+          40
+        ],
+        [
+          "ListItem",
+          4
+        ],
+        [
+          "PageHeader",
+          2
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          93
+        ],
+        [
+          "Line",
+          37
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "PageHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/LF_eksamen_des_2016"
+}
