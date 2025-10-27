@@ -1,18 +1,11 @@
 """Custom Marker LLM services with additional logging."""
 
-from __future__ import annotations
-
 import logging
-from typing import List
-
-from marker.schema import Block  # type: ignore
+from marker.schema.blocks import Block  # type: ignore
 from marker.services.gemini import GoogleGeminiService  # type: ignore
 from pydantic import BaseModel  # type: ignore
 
-try:
-    from PIL import Image  # type: ignore
-except Exception:  # pragma: no cover - optional dependency is part of marker
-    Image = object  # type: ignore
+from PIL.Image import Image as PILImage
 
 LOG = logging.getLogger("pdf_converter.llm")
 _PROMPT_PREVIEW_LEN = 2000
@@ -24,7 +17,7 @@ class LoggingGoogleGeminiService(GoogleGeminiService):
     def __call__(
         self,
         prompt: str,
-        image: Image | List[Image] | None,
+        image: PILImage | list[PILImage] | None,
         block: Block | None,
         response_schema: type[BaseModel],
         max_retries: int | None = None,

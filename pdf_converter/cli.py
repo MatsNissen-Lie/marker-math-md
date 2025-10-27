@@ -51,8 +51,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--force-ocr",
-        action="store_true",
-        help="Force OCR on all lines, which can improve inline math extraction.",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Force OCR on all lines (--no-force-ocr to disable).",
     )
     parser.add_argument(
         "--strip-existing-ocr",
@@ -61,8 +62,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--redo-inline-math",
-        action="store_true",
-        help="Re-run inline math detection to boost LaTeX fidelity.",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Re-run inline math detection for highest fidelity (--no-redo-inline-math to disable).",
     )
     parser.add_argument(
         "--llm-service",
