@@ -9,6 +9,7 @@ dependencies = [
     "openai>=1.109.1",
     "psutil>=7.1.2",
     "pyright>=1.1.407",
+    "python-dotenv>=1.2.1",
     "torch>=2.9.0",
     "torchvision>=0.24.0",
     "watchdog>=6.0.0",

@@ -7,7 +7,8 @@ import logging
 from pathlib import Path
 from typing import Sequence
 
-from .conversion import MarkerOptions
+from dotenv import load_dotenv
+from .conversion import DEFAULT_LLM_SERVICE, MarkerOptions
 from .watcher import run_inbox_watcher
 
 DEFAULT_RUNTIME = 60 * 60  # 1 hour
@@ -44,8 +45,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--use-llm",
-        action="store_true",
-        help="Enable Marker hybrid mode to post-process output with the configured LLM service.",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Enable Marker hybrid mode; pass --no-use-llm to disable.",
     )
     parser.add_argument(
         "--force-ocr",
@@ -64,11 +66,13 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--llm-service",
+        default=DEFAULT_LLM_SERVICE,
+        help="Fully-qualified Marker LLM service class, e.g. marker.services.gemini.GoogleGeminiService.",
+    )
+    parser.add_argument(
+        "--gemini-api-key",
         default=None,
-        help=(
-            "Optional fully-qualified Marker LLM service class, e.g. "
-            "marker.services.gemini.GoogleGeminiService."
-        ),
+        help="API key for Google Gemini when using the Gemini service.",
     )
     parser.add_argument(
         "--log-level",
@@ -97,6 +101,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     inbox_dir = (base_dir / args.inbox).resolve()
     outdir = (base_dir / args.outdir).resolve()
 
+    load_dotenv(dotenv_path=base_dir / ".env", override=False)
+
     logger.info("Starting PDF inbox watcher")
     logger.info("Inbox: %s", inbox_dir)
     logger.info("Output: %s", outdir)
@@ -107,6 +113,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         strip_existing_ocr=args.strip_existing_ocr,
         redo_inline_math=args.redo_inline_math,
         llm_service=args.llm_service,
+        gemini_api_key=args.gemini_api_key,
     )
     logger.info("Marker options: %s", marker_options.describe())
 

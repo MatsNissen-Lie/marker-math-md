@@ -2,6 +2,7 @@
 
 import json
 import logging
+import os
 from dataclasses import dataclass
 from functools import lru_cache
 import re
@@ -11,17 +12,19 @@ from typing import Iterable, Union
 INSTALL_HINT = "pip install marker-pdf"
 
 LOGGER = logging.getLogger(__name__)
+DEFAULT_LLM_SERVICE = "pdf_converter.llm_services.LoggingGoogleGeminiService"
 
 
 @dataclass(frozen=True)
 class MarkerOptions:
     """Configuration toggles for Marker PDF conversion."""
 
-    use_llm: bool = False
+    use_llm: bool = True
     force_ocr: bool = False
     strip_existing_ocr: bool = False
     redo_inline_math: bool = False
-    llm_service: str | None = None
+    llm_service: str | None = DEFAULT_LLM_SERVICE
+    gemini_api_key: str | None = None
 
     def to_config(self) -> dict[str, object]:
         config: dict[str, object] = {}
@@ -35,17 +38,37 @@ class MarkerOptions:
             config["redo_inline_math"] = True
         if self.llm_service:
             config["llm_service"] = self.llm_service
+
+        gemini_key = self.resolved_gemini_api_key()
+        if gemini_key:
+            config["gemini_api_key"] = gemini_key
         return config
 
     def describe(self) -> str:
+        gemini_source = self._gemini_source()
         parts = [
             f"use_llm={self.use_llm}",
             f"force_ocr={self.force_ocr}",
             f"strip_existing_ocr={self.strip_existing_ocr}",
             f"redo_inline_math={self.redo_inline_math}",
             f"llm_service={self.llm_service or 'None'}",
+            f"gemini_api_key={gemini_source}",
         ]
         return ", ".join(parts)
+
+    def resolved_gemini_api_key(self) -> str | None:
+        if self.gemini_api_key:
+            return self.gemini_api_key
+        return os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+
+    def _gemini_source(self) -> str:
+        if self.gemini_api_key:
+            return "provided"
+        if os.getenv("GEMINI_API_KEY"):
+            return "env:GEMINI_API_KEY"
+        if os.getenv("GOOGLE_API_KEY"):
+            return "env:GOOGLE_API_KEY"
+        return "None"
 
     def label(self) -> str:
         parts: list[str] = []
@@ -154,7 +177,7 @@ def _save_artifacts(
             unique_name = f"{out_md.stem}_{index:03d}_{safe_name}"
             target_path = asset_dir / unique_name
             convert_if_not_rgb(image).save(target_path)
-            relative_path = f"{asset_dir.name}/{unique_name}"
+            relative_path = f"./{asset_dir.name}/{unique_name}"
             path_map[name] = relative_path
             if safe_name != name:
                 path_map[safe_name] = relative_path
@@ -217,6 +240,7 @@ def convert_pdf(
 
 
 __all__ = [
+    "DEFAULT_LLM_SERVICE",
     "INSTALL_HINT",
     "MarkerOptions",
     "convert_pdf",
