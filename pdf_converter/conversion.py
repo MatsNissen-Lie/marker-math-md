@@ -9,13 +9,13 @@ import re
 from pathlib import Path
 from typing import Iterable, Union
 
+from dotenv import load_dotenv
+
 INSTALL_HINT = "pip install marker-pdf"
 
 LOGGER = logging.getLogger(__name__)
-DEFAULT_LLM_SERVICE = "pdf_converter.llm_services.LoggingGoogleGeminiService"
-
-
 DEFAULT_LLM_SERVICE = "marker.services.gemini.GoogleGeminiService"
+_LOCAL_ENV_LOADED = False
 
 
 @dataclass(frozen=True)
@@ -64,11 +64,13 @@ class MarkerOptions:
     def resolved_gemini_api_key(self) -> str | None:
         if self.gemini_api_key:
             return self.gemini_api_key
+        _ensure_local_env_loaded()
         return os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
 
     def _gemini_source(self) -> str:
         if self.gemini_api_key:
             return "provided"
+        _ensure_local_env_loaded()
         if os.getenv("GEMINI_API_KEY"):
             return "env:GEMINI_API_KEY"
         if os.getenv("GOOGLE_API_KEY"):
@@ -247,6 +249,19 @@ def convert_pdf(
     _save_artifacts(out_md, markdown_text, images, metadata)
     logger.info("[ok] %s (%s)", out_md.name, options.label())
     return True
+
+
+def _ensure_local_env_loaded() -> None:
+    global _LOCAL_ENV_LOADED
+    if _LOCAL_ENV_LOADED:
+        return
+    env_path = Path(__file__).resolve().parent.parent / ".env"
+    if env_path.exists():
+        try:
+            load_dotenv(env_path, override=False)
+        except Exception as exc:  # pragma: no cover - defensive
+            LOGGER.debug("Failed to load local .env: %s", exc)
+    _LOCAL_ENV_LOADED = True
 
 
 __all__ = [

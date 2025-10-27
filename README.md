@@ -19,9 +19,9 @@ uv run pdf-converter-watch
 You can reuse the conversion helpers directly. From another uv project:
 
 ```bash
-uv add /path/to/pdf_converter_03
+uv add /path/to/marker-math-md
 # on this machine the project lives at
-uv add /Users/matsalexander/Documents/workspace/projects/pdf_converter_03
+uv add /Users/matsalexander/Documents/workspace/projects/marker-math-md
 ```
 
 Then:
@@ -56,3 +56,4 @@ GOOGLE_API_KEY=...
 ```
 
 Marker also honours `GEMINI_API_KEY`. The CLI loads `.env` automatically via `python-dotenv`.
+When you import the library directly, it also falls back to loading the `.env` that ships with this project (if present), so your local key is still picked up.
