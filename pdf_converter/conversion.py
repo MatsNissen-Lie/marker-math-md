@@ -234,6 +234,8 @@ def convert_pdf(
         logger.info("[skip] %s already converted", pdf_path.name)
         return False
 
+    logger.info("[start] %s", pdf_path.name)
+    logger.info("")
     logger.debug("Marker options: %s", options.describe())
 
     try:
@@ -247,7 +249,7 @@ def convert_pdf(
         ) from exc
 
     _save_artifacts(out_md, markdown_text, images, metadata)
-    logger.info("[ok] %s (%s)", out_md.name, options.label())
+    logger.info("[done] %s (%s)", out_md.name, options.label())
     return True
 
 
