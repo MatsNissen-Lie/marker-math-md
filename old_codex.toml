@@ -1,0 +1,35 @@
+model = "gpt-5-codex"
+model_reasoning_effort = "high"
+[projects."/Users/matsalexander/Documents/workspace/Relu/Two-fraud-agent-25-26"]
+trust_level = "trusted"
+
+[projects."/Users/matsalexander/Library/Mobile Documents/com~apple~CloudDocs/Desktop/stocks3.0"]
+trust_level = "trusted"
+
+[projects."/Users/matsalexander/Documents/workspace/projects/moderne_machine_i_praksis"]
+trust_level = "trusted"
+
+[projects."/Users/matsalexander/Documents/workspace/projects/pdf_converter_two"]
+trust_level = "trusted"
+
+[projects."/Users/matsalexander/Documents/workspace/projects/pdf_converter_two copy"]
+trust_level = "trusted"
+
+[projects."/Users/matsalexander/Documents/workspace/projects/pdf_converter_03"]
+trust_level = "trusted"
+
+[projects."/Users/matsalexander/Documents/workspace/projects/marker-math-md"]
+trust_level = "trusted"
+
+[mcp_servers.context7]
+args = [
+    "-y",
+    "@upstash/context7-mcp",
+    "--api-key",
+    "ctx7sk-bec404f0-fd88-4456-bdf4-a81f27249af0",
+]
+command = "npx"
+startup_timeout_ms = 20_000
+
+# [mcp_servers.context7.env]
+# MY_ENV_VAR = "ctx7sk-bec404f0-fd88-4456-bdf4-a81f27249af0"
