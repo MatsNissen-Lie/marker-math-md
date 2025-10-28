@@ -83,6 +83,12 @@ def build_parser() -> argparse.ArgumentParser:
         choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"],
         help="Logging verbosity level.",
     )
+    parser.add_argument(
+        "--max-files",
+        type=int,
+        default=0,
+        help="Maximum number of PDFs to convert before exiting (0 means no limit).",
+    )
     return parser
 
 
@@ -126,6 +132,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         runtime_seconds=args.runtime_seconds,
         marker_options=marker_options,
         poll_interval=args.poll_interval,
+        max_files=args.max_files,
         logger=logger,
     )
 

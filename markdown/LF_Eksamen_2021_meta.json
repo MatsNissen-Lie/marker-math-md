@@ -1,0 +1,610 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Oppgave 1 (20%) sequential decision making",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          68.60132896900177,
+          73.58578509092331
+        ],
+        [
+          380.2141453027725,
+          73.58578509092331
+        ],
+        [
+          380.2141453027725,
+          89.20734840631485
+        ],
+        [
+          68.60132896900177,
+          89.20734840631485
+        ]
+      ]
+    },
+    {
+      "title": "En liten forhandler har en butikk",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          69.7289177344488,
+          99.71092239067369
+        ],
+        [
+          216.68448629307204,
+          99.71092239067369
+        ],
+        [
+          216.68448629307204,
+          109.4571027747245
+        ],
+        [
+          69.7289177344488,
+          109.4571027747245
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 2 (12%) chance constraints",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          68.22937111650366,
+          72.3525037765503
+        ],
+        [
+          322.4025228582041,
+          72.3525037765503
+        ],
+        [
+          322.4025228582041,
+          87.15187954902649
+        ],
+        [
+          68.22937111650366,
+          87.15187954902649
+        ]
+      ]
+    },
+    {
+      "title": "Mulig svar:",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          105.71803656513204,
+          217.05751132965088
+        ],
+        [
+          157.4523948842392,
+          217.05751132965088
+        ],
+        [
+          157.4523948842392,
+          227.1609735667228
+        ],
+        [
+          105.71803656513204,
+          227.1609735667228
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 3 (23%)",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          69.4733797609806,
+          71.94141000509262
+        ],
+        [
+          191.94196709697732,
+          71.94141000509262
+        ],
+        [
+          191.94196709697732,
+          87.56297332048416
+        ],
+        [
+          69.4733797609806,
+          87.56297332048416
+        ]
+      ]
+    },
+    {
+      "title": "Mulig svar:",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          104.96826325615947,
+          660.4911475652897
+        ],
+        [
+          156.70262157526665,
+          660.4911475652897
+        ],
+        [
+          156.70262157526665,
+          672.1383163332939
+        ],
+        [
+          104.96826325615947,
+          672.1383163332939
+        ]
+      ]
+    },
+    {
+      "title": "c. Endringene er som f\u00f8lger.",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          122.21304936252852,
+          387.5980968118669
+        ],
+        [
+          257.9220182865633,
+          387.5980968118669
+        ],
+        [
+          257.9220182865633,
+          399.994239628315
+        ],
+        [
+          122.21304936252852,
+          399.994239628315
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 4 (15%) multi-objektiv planleggingsproblem",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          68.22937111650366,
+          73.47120597207535
+        ],
+        [
+          379.38529434011923,
+          71.9717936052983
+        ],
+        [
+          379.38529434011923,
+          88.3851608633995
+        ],
+        [
+          68.22937111650366,
+          88.46532963984583
+        ]
+      ]
+    },
+    {
+      "title": "L\u00f8sningsforslag:",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          68.97914442547622,
+          407.09045757996853
+        ],
+        [
+          143.20670201376043,
+          407.09045757996853
+        ],
+        [
+          143.20670201376043,
+          418.08236557245255
+        ],
+        [
+          68.97914442547622,
+          418.08236557245255
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 5 (10%) markedet for elektriske sparkesykler i Oslo",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          68.22937111650366,
+          211.41714371556378
+        ],
+        [
+          492.601063994977,
+          211.41714371556378
+        ],
+        [
+          492.601063994977,
+          225.690480530262
+        ],
+        [
+          68.22937111650366,
+          225.690480530262
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 6 (20%) fire oppgavene relaterte til auksjonsteori",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          68.60132896900177,
+          107.95769040794745
+        ],
+        [
+          474.6065045796353,
+          107.95769040794745
+        ],
+        [
+          474.6065045796353,
+          123.32813143730164
+        ],
+        [
+          68.60132896900177,
+          123.32813143730164
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          57
+        ],
+        [
+          "Span",
+          54
+        ],
+        [
+          "Text",
+          7
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "Equation",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "PageFooter",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 5,
+        "llm_error_count": 0,
+        "llm_tokens_used": 15428,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          28
+        ],
+        [
+          "Span",
+          8
+        ],
+        [
+          "ListItem",
+          5
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          38
+        ],
+        [
+          "Span",
+          28
+        ],
+        [
+          "ListItem",
+          5
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          19
+        ],
+        [
+          "Span",
+          10
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "Equation",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 1,
+        "llm_tokens_used": 3946,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          47
+        ],
+        [
+          "Span",
+          26
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Equation",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 0,
+        "llm_tokens_used": 2645,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          20
+        ],
+        [
+          "Span",
+          6
+        ],
+        [
+          "Figure",
+          2
+        ],
+        [
+          "Caption",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "FigureGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          54
+        ],
+        [
+          "Span",
+          25
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          54
+        ],
+        [
+          "Span",
+          13
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          18
+        ],
+        [
+          "Span",
+          3
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "PageFooter",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/LF_Eksamen_2021"
+}

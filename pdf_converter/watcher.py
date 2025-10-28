@@ -41,6 +41,7 @@ class ConversionWorker:
         *,
         marker_options: MarkerOptions,
         logger: logging.Logger | None = None,
+        max_files: int | None = None,
     ):
         self._outdir = outdir
         self._marker_options = marker_options
@@ -51,6 +52,10 @@ class ConversionWorker:
             target=self._run, name="pdf-convert-worker", daemon=True
         )
         self._pending: set[Path] = set()
+        normalized_limit = max_files if max_files and max_files > 0 else None
+        self._max_files: int | None = normalized_limit
+        self._processed = 0
+        self._limit_reached = threading.Event()
 
     def start(self) -> None:
         self._thread.start()
@@ -60,18 +65,41 @@ class ConversionWorker:
         self._queue.put(None)
         self._thread.join()
 
-    def submit(self, pdf_path: Path) -> None:
+    def submit(self, pdf_path: Path) -> bool:
         pdf_path = pdf_path.resolve()
+        if self._stop.is_set() or self._limit_reached.is_set():
+            return False
+        if self._max_files is not None and self._processed >= self._max_files:
+            self._limit_reached.set()
+            return False
         if pdf_path in self._pending:
-            return
+            return False
         if not is_pdf(pdf_path):
-            return
+            return False
         self._pending.add(pdf_path)
         self._queue.put(pdf_path)
+        return True
 
-    def preload(self, pdfs: Iterable[Path]) -> None:
+    def preload(self, pdfs: Iterable[Path]) -> int:
+        queued = 0
         for pdf in pdfs:
-            self.submit(pdf)
+            if self.submit(pdf):
+                queued += 1
+            elif self._limit_reached.is_set():
+                break
+        return queued
+
+    @property
+    def processed(self) -> int:
+        return self._processed
+
+    @property
+    def max_files(self) -> int | None:
+        return self._max_files
+
+    @property
+    def limit_reached(self) -> bool:
+        return self._limit_reached.is_set()
 
     def _run(self) -> None:
         while True:
@@ -90,12 +118,20 @@ class ConversionWorker:
                 if not self._wait_until_ready(pdf_path):
                     self._logger.warning("[skip] %s never became ready", pdf_path.name)
                     continue
-                convert_pdf(
+                converted = convert_pdf(
                     pdf_path,
                     self._outdir,
                     options=self._marker_options,
                     logger=self._logger,
                 )
+                if converted:
+                    self._processed += 1
+                    if self._max_files is not None and self._processed >= self._max_files:
+                        self._limit_reached.set()
+                        self._logger.info(
+                            "[limit] Reached maximum of %s converted PDFs", self._max_files
+                        )
+                        self._stop.set()
             except Exception as exc:
                 self._logger.error("[fail] %s: %s", pdf_path.name, exc)
             finally:
@@ -140,8 +176,10 @@ class InboxEventHandler(FileSystemEventHandler):
     def _handle_path(self, path: Path) -> None:
         if not is_pdf(path):
             return
-        self._logger.info("[queue] %s", path.name)
-        self._worker.submit(path)
+        if self._worker.submit(path):
+            self._logger.info("[queue] %s", path.name)
+        elif self._worker.limit_reached:
+            self._logger.info("[skip] %s (max files reached)", path.name)
 
 
 def run_inbox_watcher(
@@ -151,6 +189,7 @@ def run_inbox_watcher(
     runtime_seconds: int,
     marker_options: MarkerOptions,
     poll_interval: float,
+    max_files: int = 0,
     logger: logging.Logger | None = None,
 ) -> None:
     inbox_dir.mkdir(parents=True, exist_ok=True)
@@ -161,6 +200,7 @@ def run_inbox_watcher(
         outdir,
         marker_options=marker_options,
         logger=logger,
+        max_files=max_files,
     )
     handler = InboxEventHandler(worker, logger=logger)
     observer = Observer()
@@ -175,14 +215,30 @@ def run_inbox_watcher(
     worker.start()
     backlog = gather_inbox_pdfs(inbox_dir, outdir)
     if backlog:
-        logger.info("Found %d existing PDFs to convert", len(backlog))
-        worker.preload(backlog)
+        queued = worker.preload(backlog)
+        if queued:
+            logger.info("Found %d existing PDFs to convert", queued)
+        elif worker.limit_reached:
+            logger.info(
+                "Max files limit reached before processing existing backlog; %d PDFs left",
+                len(backlog),
+            )
 
     observer.start()
     deadline = time.monotonic() + runtime_seconds if runtime_seconds > 0 else None
+    limit_logged = False
 
     try:
         while True:
+            if worker.limit_reached:
+                if not limit_logged:
+                    cap = worker.max_files or max_files
+                    logger.info(
+                        "Max files limit (%s) reached; shutting down watcher.",
+                        cap,
+                    )
+                    limit_logged = True
+                break
             if deadline is not None and time.monotonic() >= deadline:
                 logger.info("Runtime limit reached; shutting down watcher.")
                 break
