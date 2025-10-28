@@ -1,0 +1,381 @@
+{
+  "table_of_contents": [
+    {
+      "title": "L\u00f8sningsforslag til eksamen i A\u00d8O fordypningsemne, 2018",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          68.97914442547622,
+          72.76359754800797
+        ],
+        [
+          410.1260000079945,
+          72.76359754800797
+        ],
+        [
+          410.1260000079945,
+          85.46650490629173
+        ],
+        [
+          68.97914442547622,
+          85.46650490629173
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 1",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          69.7289177344488,
+          98.21151002389665
+        ],
+        [
+          121.46327605355596,
+          98.21151002389665
+        ],
+        [
+          121.46327605355596,
+          108.70739659133598
+        ],
+        [
+          69.7289177344488,
+          108.70739659133598
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 2 (20 %)",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          69.7289177344488,
+          71.53031623363495
+        ],
+        [
+          152.20398172143123,
+          71.53031623363495
+        ],
+        [
+          152.20398172143123,
+          82.46768017273764
+        ],
+        [
+          69.7289177344488,
+          82.46768017273764
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 3",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          69.7289177344488,
+          693.4782196343847
+        ],
+        [
+          121.46327605355596,
+          693.4782196343847
+        ],
+        [
+          121.46327605355596,
+          705.0258180499077
+        ],
+        [
+          69.7289177344488,
+          705.0258180499077
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 4",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          69.7289177344488,
+          281.1398187706965
+        ],
+        [
+          120.7135027445834,
+          281.1398187706965
+        ],
+        [
+          120.7135027445834,
+          291.05439019203186
+        ],
+        [
+          69.7289177344488,
+          291.05439019203186
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 5",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          69.7289177344488,
+          535.2902149394062
+        ],
+        [
+          120.7135027445834,
+          535.2902149394062
+        ],
+        [
+          120.7135027445834,
+          547.1658098101616
+        ],
+        [
+          69.7289177344488,
+          547.1658098101616
+        ]
+      ]
+    },
+    {
+      "title": "Tabus\u00f8k-algoritme",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          104.21848994718691,
+          151.693601667881
+        ],
+        [
+          192.6917404059499,
+          151.693601667881
+        ],
+        [
+          192.6917404059499,
+          161.9365356119212
+        ],
+        [
+          104.21848994718691,
+          161.9365356119212
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 6",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          69.7289177344488,
+          95.21268529034255
+        ],
+        [
+          119.96372943561083,
+          95.21268529034255
+        ],
+        [
+          119.96372943561083,
+          105.24000549316406
+        ],
+        [
+          69.7289177344488,
+          105.24000549316406
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          48
+        ],
+        [
+          "Span",
+          11
+        ],
+        [
+          "Text",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          51
+        ],
+        [
+          "Span",
+          18
+        ],
+        [
+          "ListItem",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          58
+        ],
+        [
+          "Span",
+          31
+        ],
+        [
+          "ListItem",
+          12
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "ListGroup",
+          3
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "Equation",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 0,
+        "llm_tokens_used": 3462,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Span",
+          93
+        ],
+        [
+          "Line",
+          55
+        ],
+        [
+          "Text",
+          16
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Equation",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 0,
+        "llm_tokens_used": 4077,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          50
+        ],
+        [
+          "Span",
+          40
+        ],
+        [
+          "ListItem",
+          6
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "Equation",
+          3
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 3,
+        "llm_error_count": 0,
+        "llm_tokens_used": 10193,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/LF_Eksamen_2018"
+}

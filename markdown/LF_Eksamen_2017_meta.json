@@ -1,0 +1,445 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Oppgave 1, Multikriterie, vekt: 10 %",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          69.7289177344488,
+          86.96591727306878
+        ],
+        [
+          301.7295740246773,
+          86.96591727306878
+        ],
+        [
+          301.7295740246773,
+          100.306880235672
+        ],
+        [
+          69.7289177344488,
+          100.306880235672
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 2, Simulering, vekt: 10 %",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          69.7289177344488,
+          251.15157143515555
+        ],
+        [
+          290.1622705723837,
+          251.15157143515555
+        ],
+        [
+          290.1622705723837,
+          264.74438881874084
+        ],
+        [
+          69.7289177344488,
+          264.74438881874084
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 3, Usikkerhet, vekt: 15 %",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          69.18269616365433,
+          74.40797263383865
+        ],
+        [
+          290.1622705723837,
+          74.40797263383865
+        ],
+        [
+          290.1622705723837,
+          88.3851608633995
+        ],
+        [
+          69.18269616365433,
+          88.3851608633995
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 4, Grenser, vekt: 10 %",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          68.97914442547622,
+          475.22439980506897
+        ],
+        [
+          272.16771115704205,
+          475.22439980506897
+        ],
+        [
+          272.16771115704205,
+          491.66815066337585
+        ],
+        [
+          68.97914442547622,
+          491.66815066337585
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 5, Sekvensielle beslutninger, vekt: 15 %",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          69.7289177344488,
+          74.40797263383865
+        ],
+        [
+          383.13416088498207,
+          74.40797263383865
+        ],
+        [
+          383.13416088498207,
+          88.3851608633995
+        ],
+        [
+          69.7289177344488,
+          88.3851608633995
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 6, Airbnb, vekt: 10 %",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          69.7289177344488,
+          622.2561322124749
+        ],
+        [
+          263.9202047583438,
+          622.2561322124749
+        ],
+        [
+          263.9202047583438,
+          639.2508146166801
+        ],
+        [
+          69.7289177344488,
+          639.2508146166801
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 7, Auksjoner, vekt: 15 %",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          69.7289177344488,
+          380.8507411613702
+        ],
+        [
+          285.6636307185483,
+          380.8507411613702
+        ],
+        [
+          285.6636307185483,
+          395.0611143708229
+        ],
+        [
+          69.7289177344488,
+          395.0611143708229
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 8, Robusthet: 15 %",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          68.97914442547622,
+          415.3372255972423
+        ],
+        [
+          253.42337843272787,
+          415.3372255972423
+        ],
+        [
+          253.42337843272787,
+          431.23736625909805
+        ],
+        [
+          68.97914442547622,
+          431.23736625909805
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          44
+        ],
+        [
+          "Span",
+          32
+        ],
+        [
+          "Text",
+          11
+        ],
+        [
+          "ListItem",
+          4
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 0,
+        "llm_tokens_used": 2012,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Span",
+          61
+        ],
+        [
+          "Line",
+          41
+        ],
+        [
+          "ListItem",
+          5
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "SectionHeader",
+          2
+        ],
+        [
+          "ListGroup",
+          2
+        ],
+        [
+          "Equation",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 0,
+        "llm_tokens_used": 4010,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          52
+        ],
+        [
+          "Span",
+          40
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "Equation",
+          6
+        ],
+        [
+          "SectionHeader",
+          2
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 8,
+        "llm_error_count": 0,
+        "llm_tokens_used": 25389,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          48
+        ],
+        [
+          "Span",
+          6
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          41
+        ],
+        [
+          "Span",
+          10
+        ],
+        [
+          "Text",
+          5
+        ],
+        [
+          "Equation",
+          4
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 4,
+        "llm_error_count": 1,
+        "llm_tokens_used": 8418,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          44
+        ],
+        [
+          "Span",
+          30
+        ],
+        [
+          "Text",
+          10
+        ],
+        [
+          "Equation",
+          6
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 12,
+        "llm_error_count": 8,
+        "llm_tokens_used": 41643,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          25
+        ],
+        [
+          "Span",
+          18
+        ],
+        [
+          "Equation",
+          6
+        ],
+        [
+          "Text",
+          5
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 6,
+        "llm_error_count": 0,
+        "llm_tokens_used": 17310,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/LF_Eksamen_2017"
+}
