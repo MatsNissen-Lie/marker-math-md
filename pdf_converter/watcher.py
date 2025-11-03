@@ -69,7 +69,9 @@ class ConversionWorker:
         pdf_path = pdf_path.resolve()
         if self._stop.is_set() or self._limit_reached.is_set():
             return False
-        if self._max_files is not None and self._processed >= self._max_files:
+        if self._max_files is not None and (
+            self._processed + len(self._pending)
+        ) >= self._max_files:
             self._limit_reached.set()
             return False
         if pdf_path in self._pending:
