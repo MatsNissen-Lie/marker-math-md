@@ -21,7 +21,7 @@ You can reuse the conversion helpers directly. From another uv project:
 ```bash
 uv add /path/to/marker-math-md
 # on this machine the project lives at
-uv add /Users/matsalexander/Documents/workspace/projects/marker-math-md
+uv add /your_path/marker-math-md
 ```
 
 Then:
