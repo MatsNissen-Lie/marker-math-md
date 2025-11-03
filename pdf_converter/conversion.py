@@ -167,6 +167,11 @@ def _convert_with_marker(pdf_path: Path, options: MarkerOptions):
     return rendered.markdown, rendered.images, rendered.metadata
 
 
+def _sanitize_asset_dir_name(stem: str) -> str:
+    sanitized = re.sub(r"[^0-9A-Za-z]+", "_", stem).strip("_")
+    return sanitized or "assets"
+
+
 def _save_artifacts(
     out_md: Path,
     markdown_text: str,
@@ -180,18 +185,23 @@ def _save_artifacts(
     if images:
         from marker.output import convert_if_not_rgb  # type: ignore
 
-        asset_dir = out_md.with_name(f"{out_md.stem}_assets")
+        asset_dir_name = f"{_sanitize_asset_dir_name(out_md.stem)}_assets"
+        asset_dir = out_md.with_name(asset_dir_name)
         asset_dir.mkdir(parents=True, exist_ok=True)
 
         for index, (name, image) in enumerate(images.items(), start=1):
             safe_name = name.replace("/", "_")
-            unique_name = f"{out_md.stem}_{index:03d}_{safe_name}"
+            suffix = Path(name).suffix or ".png"
+            unique_name = f"fig{index}{suffix}"
             target_path = asset_dir / unique_name
             convert_if_not_rgb(image).save(target_path)
             relative_path = f"./{asset_dir.name}/{unique_name}"
             path_map[name] = relative_path
             if safe_name != name:
                 path_map[safe_name] = relative_path
+            basename = Path(name).name
+            if basename not in path_map:
+                path_map[basename] = relative_path
 
         final_markdown = _rewrite_image_paths(final_markdown, path_map)
 
