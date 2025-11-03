@@ -1,4 +1,4 @@
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment__assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _001__page_0_Picture_2.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig1.jpeg)
 
 # On-demand high-capacity ride-sharing via dynamic trip-vehicle assignment
 
@@ -58,7 +58,7 @@ We consider a fleet  $\mathcal V$  of m vehicles of capacity  $\nu$ , the maximu
 
 We propose an anytime optimal algorithm for batch assignment of a set of requests  $\mathcal{R} = \{r_1, \dots, r_n\}$  to a set of vehicles  $\mathcal{V} = \{v_1, \dots, v_m\}$ , which minimizes a cost function  $\mathcal{C}$ , satisfies a set of constraints  $\mathcal{Z}$ , and allows for multiple passengers per vehicle. A passenger is a past request that has been picked up by a vehicle and that is now en route to its destination. We denote by  $\mathcal{P}_v$  the set of passengers for vehicle  $v \in \mathcal{V}$ . In a second step, the method also allows to rebalance the fleet of vehicles by driving idle vehicles to areas of high demand, where those vehicles are
 
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _002__page_1_Figure_12.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig2.jpeg)
 
 Fig. 1. Schematic overview of the proposed method for batch assignment of multiple requests to multiple vehicles of capacity  $\nu$ . The method consists of several steps leading to an integer linear optimization that provides an anytime optimal assignment. (A) Example of a street network with four requests (orange human, origin; red triangle, destination) and two vehicles (yellow car, origin; red triangle, destination of passenger). Vehicle 1 has one passenger, and vehicle 2 is empty. (B) Pairwise shareability RV-graph of requests and vehicles. Cliques of this graph are potential trips. (C) RTV-graph of candidate trips and vehicles which can execute them. A node (yellow triangle) is added for requests that cannot be satisfied. (D) Optimal assignment given by the solution of the ILP, where vehicle 1 serves requests 2 and 3 and vehicle 2 serves requests 1 and 4. (E) Planned route for the two vehicles and their assigned requests. In this case, no rebalancing step is required because all requests and vehicles are assigned.
 
@@ -83,7 +83,7 @@ Next, the cliques of the RV-graph—or regions for which its induced subgraph is
 
 This step computes feasible trips. There might be several trips of varying size that can service a particular request. In addition, more than one vehicle might be able to service a trip. The assignment step will later ensure that each request and vehicle are assigned to a maximum of one trip. The RTV-graph contains
 
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _003__page_2_Figure_11.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig3.jpeg)
 
 (A) Snapshot: 2,000 vehicles, capacity of 4 ( $\Omega = 5$  min, Wednesday, 2000 hours). Vehicle in the fleet are represented at their current positions. Colors indicate number of passengers (0: light blue; 1: light green; 2: yellow; 3: dark orange; 4: dark red); 39 rebalancing vehicles are displayed in dark blue-mostly in the upper Manhattan returning to the middle. (B) Close view of the scheduled path for a vehicle (dark red circle) with four passengers, which drops one off, picks up a new one (blue star), and drops all four. Drop-off locations are displayed with inverted triangles. See Movie S1 for a complete simulation.
 
@@ -132,13 +132,13 @@ We assess the performance of a MoD fleet controller using the proposed algorithm
 
 We perform a simulation of the evolution of the taxi fleet, where vehicles are initialized at midnight at sampled positions from a historical demand distribution and continuously travel to pick up and drop off passengers to satisfy the real requests extracted from the dataset. Requests are collected during a
 
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _004__page_3_Figure_16.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig4.jpeg)
 
 Fig. 3. Mean number of passengers per vehicle for four different vehicle types (capacity one, two, four, and ten). We show four one-week time series for different fleet sizes and maximum waiting time: (A) 1000 vehicles and  $\Omega=2$  min; (B) 1000 vehicles and  $\Omega=7$  min; (C) 3000 vehicles and  $\Omega=2$  min; and (D) 3000 vehicles and  $\Omega=7$  min. At night, most vehicles wait, and during rush hour, the mean occupancy decreases as the fleet gets larger. Larger maximum waiting time enables more opportunities for ride-sharing.
 
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _005__page_4_Figure_1.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig5.jpeg)
 
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _006__page_4_Figure_2.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig6.jpeg)
 
 Fig. 4. Percentage of vehicles in each state (waiting, rebalancing, and number of passengers) for a representative day (Friday 0000 hours to 2400 hours). (A) A fleet of 1,000 vehicles of capacity 10 with many opportunities for ride-sharing in high-capacity vehicles. (B) A fleet of 2,000 vehicles of capacity four, showing the utility of full vehicle-sharing. Additional figures, for varying days and parameters, are in SI Appendix, VIII. Additional Experimental Figures.
 
@@ -150,7 +150,7 @@ High vehicle occupancy is achieved in times of high demand, with a large number 
 
 We observe that the value of fleets with larger passenger capacities increases with larger  $\Omega$  and  $\Delta$  values, as expected, because passengers are willing to incur a larger personal time penalty. High-capacity vehicles are also more important when the fleet size is smaller, because seating capacity might be a bottleneck with smaller fleets. For instance (Fig. 5A), a fleet of 1,000 vehicles with a capacity of 10 can satisfy almost 80% of the requests with  $\Omega = 420$  s, compared with below 30% for a single-rider taxi, for a net gain of over 50%. However, with a larger fleet of 3,000 vehicles and  $\Omega = 120$  s, the benefit is only about 15%. Interestingly, if longer waiting times and delays are
 
-![](./alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _assets/alonso-mora-et-al-2017-on-demand-high-capacity-ride-sharing-via-dynamic-trip-vehicle-assignment _007__page_4_Figure_8.jpeg)
+![](./alonso_mora_et_al_2017_on_demand_high_capacity_ride_sharing_via_dynamic_trip_vehicle_assignment_assets/fig7.jpeg)
 
 Fig. 5. Comparison of several performance metrics for varying vehicle capacity (1, 2, 4, and 10 passenger, shown with lines). Each subplot is for a fleet size of 1,000, 2,000, and 3,000 vehicles, and the coordinate axes show increasing maximum waiting time  $\Omega$  of 2, 5, and 7 min. We analyze service rate (percentage of requests serviced) (A), average in car delay  $\delta-\omega$  (B), average waiting time  $\omega$  (C), average distance traveled by each vehicle during a single day (D), percentage of shared rides (number of passengers who shared a ride divided by the total number of picked-up passengers) (E), and average computational time for a 30-s iteration of the method (F), in a 24 core 2.5 GHz machine, including computation of the RV-graph, computation of the RTV-graph, ILP assignment, rebalancing, and data writing (higher levels of parallelization would drastically reduce this computational time). The parameters used in the simulation are specified in SI Appendix, III. Theoretical Guarantees, C. Heuristics for Real-Time Execution.
 
