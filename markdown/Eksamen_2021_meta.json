@@ -1,0 +1,401 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Oppgave 1 (20%)",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          68.97914442547622,
+          71.94141000509262
+        ],
+        [
+          192.6917404059499,
+          71.94141000509262
+        ],
+        [
+          192.6917404059499,
+          87.56297332048416
+        ],
+        [
+          68.97914442547622,
+          87.56297332048416
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 2 (12%)",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          68.22937111650366,
+          71.94141000509262
+        ],
+        [
+          193.44151371492245,
+          71.94141000509262
+        ],
+        [
+          193.44151371492245,
+          88.46532963984583
+        ],
+        [
+          68.22937111650366,
+          88.46532963984583
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 3 (23%)",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          68.97914442547622,
+          72.3525037765503
+        ],
+        [
+          192.6917404059499,
+          72.3525037765503
+        ],
+        [
+          192.6917404059499,
+          87.15187954902649
+        ],
+        [
+          68.97914442547622,
+          87.15187954902649
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 4 (15%)",
+      "heading_level": null,
+      "page_id": 3,
+      "polygon": [
+        [
+          68.97914442547622,
+          71.94141000509262
+        ],
+        [
+          192.6917404059499,
+          71.94141000509262
+        ],
+        [
+          192.6917404059499,
+          87.56297332048416
+        ],
+        [
+          68.97914442547622,
+          87.56297332048416
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 5 (10%)",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          68.97914442547622,
+          71.94141000509262
+        ],
+        [
+          193.44151371492245,
+          71.94141000509262
+        ],
+        [
+          193.44151371492245,
+          87.56297332048416
+        ],
+        [
+          68.97914442547622,
+          87.56297332048416
+        ]
+      ]
+    },
+    {
+      "title": "Oppgave 6 (20%)",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          68.97914442547622,
+          71.94141000509262
+        ],
+        [
+          192.6917404059499,
+          71.94141000509262
+        ],
+        [
+          192.6917404059499,
+          87.56297332048416
+        ],
+        [
+          68.97914442547622,
+          87.56297332048416
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          41
+        ],
+        [
+          "Span",
+          41
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 1,
+        "llm_error_count": 0,
+        "llm_tokens_used": 1677,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          13
+        ],
+        [
+          "Span",
+          5
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          35
+        ],
+        [
+          "Span",
+          8
+        ],
+        [
+          "Text",
+          3
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Picture",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          25
+        ],
+        [
+          "Span",
+          13
+        ],
+        [
+          "ListItem",
+          3
+        ],
+        [
+          "Text",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          19
+        ],
+        [
+          "Span",
+          7
+        ],
+        [
+          "ListItem",
+          2
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          27
+        ],
+        [
+          "Span",
+          11
+        ],
+        [
+          "ListItem",
+          4
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ],
+        [
+          "PageFooter",
+          1
+        ],
+        [
+          "ListGroup",
+          1
+        ]
+      ],
+      "block_metadata": {
+        "llm_request_count": 0,
+        "llm_error_count": 0,
+        "llm_tokens_used": 0,
+        "previous_text": "",
+        "previous_type": "",
+        "previous_order": 0
+      }
+    }
+  ],
+  "debug_data_path": "debug_data/Eksamen_2021"
+}
