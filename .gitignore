@@ -13,3 +13,7 @@ __pycache__
 
 
 readme_local.md
+
+indbox*/
+outbox*/
+marker*/
